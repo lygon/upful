@@ -12,10 +12,10 @@ Warning: This is still a very early pre-alpha level of crap, only use if you bel
 _config.yml_
 
 ```yaml
-interval: 60
+interval: 60 # Minutes to wait after every test has completed to start all over again
 
 api:
-  port: 3000
+  port: 3000 # HTTP port to listen to
 
 notifications:
   telegram:
