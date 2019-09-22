@@ -47,7 +47,7 @@ if(typeof config.notifications.telegram === "object") {
                 for(const [site, siteData] of Object.entries(data)) {
                         response[site] = {
                                 url: config.sites[site].url,
-                                status: parseInt(siteData.headers.status),
+                                status: (typeof siteData.headers !== "undefined")?parseInt(siteData.headers.status):0,
                                 server: siteData.headers.server
                         }
                         if(Array.isArray(siteData.errors)) {
@@ -63,6 +63,9 @@ const monitor = async () => {
         console.log("Monitoring...",new Date());
         for(const [site, options] of Object.entries(config.sites)) {
                 console.log("Testing:",site,options.url);
+                if(typeof data[site] !== "undefined" && data[site].errors !== "undefined") {
+                        delete data[site].errors;
+                }
                 const browser = await puppeteer.launch({args:["--no-sandbox"]})
                 const page = await browser.newPage()
                 try {
@@ -95,7 +98,7 @@ const monitor = async () => {
                 }
                 await browser.close();
         }
-        setTimeout(monitor, config.interval*1000);
+        setTimeout(monitor, parseInt(config.interval)*60000);
 }
 
 const test = (headers, siteOptions) => {
