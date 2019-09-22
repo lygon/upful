@@ -42,6 +42,10 @@ sites:
 
   google:
     url: https://google.com
+  
+  # There is also support for a shorter config
+  xkcd.com:
+  theonion.com:
 ```
 
 ### Commands
@@ -62,7 +66,7 @@ sites:
 
 ### TODO
 
-1. Actual logging nad sane output
+1. Actual logging and sane output
 2. Error handling
 3. Better formatting
 4. More commands
